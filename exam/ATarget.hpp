@@ -3,45 +3,20 @@
 #pragma once
 #include <iostream>
 #include <string>
+class ASpell;
 
-
-class ATarget : public ASpell
+class ATarget
 {
-    private:
+private:
     std::string type;
-    public:
+
+public:
     ATarget();
     ~ATarget();
-    ATarget(std::string);
+    ATarget(std::string type);
     ATarget(const ATarget &cp);
-    ATarget & operator=(const ATarget &rh);
-    std::string const &getType() const ;
-    virtual void *clone() = 0;
-     void getHitBySpell(const ATarget &str);
-}
-
-
-ATarget::ATarget() {}
-ATarget::~ATarget() {}
-ATarget::ATarget(std::string type) : type(type)
-{
-
-}
-
-ATarget::ATarget(const ATarget &cp) : type(cp.type) {}
-
-ATarget & ATarget::operator=(const ATarget &rs)
-{
-    this->type = ts.type;
-    return *this;
-}
-
-std::string const &ATarget::getType() const
-{
-    return this->type;
-}
-
-void ATarget::getHitBySpell(const ATarget &str)
-{
-    std::cout << this->type + " has been " + ASpell::getEffects()
+    ATarget &operator=(const ATarget &rh);
+    std::string const &getType() const;
+    virtual ATarget *clone() = 0;
+    void getHitBySpell(ASpell const &str);
 }
